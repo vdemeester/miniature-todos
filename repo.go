@@ -1,6 +1,9 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+	"time"
+)
 
 var currentId int
 
@@ -8,8 +11,13 @@ var todos Todos
 
 // Give us some seed data
 func init() {
-	RepoCreateTodo(Todo{Name: "Write presentation"})
-	RepoCreateTodo(Todo{Name: "Host meetup"})
+	due, _ := time.Parse(time.RFC3339, "2012-11-01T22:08:41+00:00")
+	// Format is 2015-05-14T14:14:00
+	defaultFormat := "2006-01-02T15:04:00"
+	RepoCreateTodo(Todo{Name: "Write presentation", Completed: true})
+	RepoCreateTodo(Todo{Name: "Host meetup", Due: jsonTime{time.Now(), defaultFormat}})
+	RepoCreateTodo(Todo{Name: "Initiate project Y", Due: jsonTime{due, defaultFormat}})
+	RepoCreateTodo(Todo{Name: "Prepare retro. n.100"})
 }
 
 func RepoFindTodo(id int) Todo {
