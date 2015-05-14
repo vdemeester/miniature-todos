@@ -17,14 +17,14 @@ func main() {
 	app.Flags = []cli.Flag{
 		cli.StringFlag{
 			Name:   "bind, b",
-			Value:  "127.0.0.1:8080",
+			Value:  "127.0.0.1:9090",
 			Usage:  "host string to bind on",
 			EnvVar: "MIMIATURE_TODOS_HOST",
 		},
 	}
 
 	app.Action = func(c *cli.Context) {
-		host := "127.0.0.1:8080"
+		host := "127.0.0.1:9090"
 		if c.IsSet("bind") {
 			host = c.String("bind")
 		}
